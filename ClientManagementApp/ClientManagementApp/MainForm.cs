@@ -17,10 +17,26 @@ public partial class MainForm : Form
         clientVM = new ClientViewModel();
         setBindings();
         setupDataGridView();
+
+        // set the text of labelClientData to empty string. it should only show data when we click save button.
+        labelClientData.Text = string.Empty;
     }
 
     private void setBindings()
     {
+        // textboxes
+        textBoxClientCode.DataBindings.Add("Text", clientVM, "DisplayClient.ClientCode", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxCompanyName.DataBindings.Add("Text", clientVM, "DisplayClient.CompanyName", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxAddress1.DataBindings.Add("Text", clientVM, "DisplayClient.Address1", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxAddress2.DataBindings.Add("Text", clientVM, "DisplayClient.Address2", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxCity.DataBindings.Add("Text", clientVM, "DisplayClient.City", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxProvince.DataBindings.Add("Text", clientVM, "DisplayClient.Province", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxPostalCode.DataBindings.Add("Text", clientVM, "DisplayClient.PostalCode", false, DataSourceUpdateMode.OnPropertyChanged);
+        textBoxYtdSales.DataBindings.Add("Text", clientVM, "DisplayClient.YtdSales", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00;(#,##0.00);0");
+        checkBoxCreditHold.DataBindings.Add("Checked", clientVM, "DisplayClient.CreditHold", false, DataSourceUpdateMode.OnPropertyChanged);
+        richTextBoxNotes.DataBindings.Add("Text", clientVM, "DisplayClient.Notes", false, DataSourceUpdateMode.OnPropertyChanged);
+
+        // data grid view
         dataGridViewClients.AutoGenerateColumns = false;
         dataGridViewClients.DataSource = clientVM.Clients;
     }
@@ -45,16 +61,16 @@ public partial class MainForm : Form
         // add columns
 
         // column widths
-        int clientCodeColumnWidth = 500;
-        int companyNameColumnWidth = 200;
+        int clientCodeColumnWidth = 80;
+        int companyNameColumnWidth = 150;
         int address1ColumnWidth = 120;
-        int address2ColumnWidth = 100;
+        int address2ColumnWidth = 80;
         int cityColumnWidth = 80;
-        int provinceColumnWidth = 80;
+        int provinceColumnWidth = 70;
         int postalCodeColumnWidth = 80;
         int ytdSalesColumnWidth = 80;
-        int creditHoldColumnWidth = 100;
-        int notesColumnWidth = 200;
+        int creditHoldColumnWidth = 80;
+        // int notesColumnWidth = 150;
 
         // column 1: clientCode
         DataGridViewTextBoxColumn clientCode = new DataGridViewTextBoxColumn();
@@ -65,7 +81,7 @@ public partial class MainForm : Form
         clientCode.SortMode = DataGridViewColumnSortMode.NotSortable;
         //clientCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(clientCode);
-        columnMinimumWidths.Add(clientCode.Name, clientCodeColumnWidth);
+        columnMinimumWidths.Add(clientCode.Name, clientCodeColumnWidth);        // if AutoSizeColumnMode.Fill is set on columns we cannot set minimum width
 
         // column 2: companyName
         DataGridViewTextBoxColumn companyName = new DataGridViewTextBoxColumn();
@@ -74,7 +90,7 @@ public partial class MainForm : Form
         companyName.HeaderText = "Company Name";
         companyName.Width = companyNameColumnWidth;
         companyName.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // companyName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //companyName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;         // can only set minimum width or AutoSizeColumnMode.Fill
         dataGridViewClients.Columns.Add(companyName);
 
         // column 3: address1
@@ -158,7 +174,7 @@ public partial class MainForm : Form
         notes.Name = "notes";
         notes.DataPropertyName = "Notes";
         notes.HeaderText = "Notes";
-        notes.Width = notesColumnWidth;
+        // notes.Width = notesColumnWidth;
         notes.SortMode = DataGridViewColumnSortMode.NotSortable;
         notes.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(notes);
@@ -175,5 +191,40 @@ public partial class MainForm : Form
                 e.Column.Width = minWidth;
             }
         }
+    }
+
+    private void dataGridViewClients_SelectionChanged(object sender, EventArgs e)
+    {
+        if (dataGridViewClients.SelectedRows.Count > 0)
+        {
+            int index = dataGridViewClients.SelectedRows[0].Index;
+            clientVM.SetDisplayProduct(index);
+        }
+    }
+
+    private void buttonSave_Click(object sender, EventArgs e)
+    {
+        // save whatever is in the text boxes to the Clients list and also show on labelClientData
+        
+
+        // get the updated client from the Ui first
+        Client displayedClient = clientVM.DisplayClient;
+
+        int index = dataGridViewClients.SelectedRows[0].Index;
+        clientVM.Clients[index] = displayedClient;
+
+        labelClientData.Text = $"""
+                               {displayedClient.ClientCode}
+                               {displayedClient.CompanyName}
+                               {displayedClient.Address1}
+                               {displayedClient.Address2}
+                               {displayedClient.City}
+                               {displayedClient.Province}
+                               {displayedClient.PostalCode}
+                               {displayedClient.YtdSales}
+                               {displayedClient.CreditHold}
+                               {displayedClient.Notes}
+                               """;
+
     }
 }

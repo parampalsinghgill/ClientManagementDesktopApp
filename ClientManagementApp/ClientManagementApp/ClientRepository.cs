@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ internal class ClientRepository
     {
         ClientList clients = new ClientList();
 
-        String connString = """
+        /*String connString = """
                             Server=skeena.database.windows.net;
                             Initial Catalog=comp3602;
                             User ID=student;
@@ -20,18 +21,23 @@ internal class ClientRepository
                             Encrypt=True;
                             TrustServerCertificate=False;
                             Connection Timeout=30;
-                            """;
+                            """;*/
+        //string connString = @"Data Source=C:\Users\parampal.gill\Documents\MyProjects\Clients.db";
+
+        string databaseFileRelativePath = "../../../../Databases/Clients.db";
+        string folderPath = AppDomain.CurrentDomain.BaseDirectory;
+        string connString = $"Data Source={Path.Combine(folderPath, databaseFileRelativePath)};";
 
         // SqlConnection
-        using (SqlConnection conn = new SqlConnection(connString))
+        using (SqliteConnection conn = new SqliteConnection(connString))
         {
-            String tableName = "Client999999";
+            String tableName = "Clients";
             String query = $"""
                            SELECT  ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes
                            FROM {tableName}
                            """;
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            
+            using (SqliteCommand cmd = new SqliteCommand(query, conn))
             {
                 try
                 {
@@ -48,7 +54,7 @@ internal class ClientRepository
                     bool creditHold;    // not null
                     String notes;       // NULL
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
@@ -65,8 +71,9 @@ internal class ClientRepository
 
                                 postalCode = reader["PostalCode"] as String;
 
-                                ytdSales = (decimal)reader["YTDSales"];
-                                creditHold = (bool)reader["creditHold"];
+                                // ytdSales = (decimal)reader["YTDSales"];
+                                ytdSales = Convert.ToDecimal(reader["YTDSales"]);
+                                creditHold = Convert.ToBoolean(reader["creditHold"]);
 
                                 notes = reader["Notes"] as String;
 

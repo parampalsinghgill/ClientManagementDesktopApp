@@ -21,10 +21,10 @@ CREATE TABLE Clients
 );
 GO
 
-/*
+
 DROP TABLE Clients;
 GO
-*/
+
 
 
 

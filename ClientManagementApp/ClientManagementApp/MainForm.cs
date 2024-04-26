@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace ClientManagementApp;
@@ -14,28 +15,30 @@ public partial class MainForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        clientVM = new ClientViewModel();
-        setBindings();
-        setupDataGridView();
-
-        // set the text of labelClientData to empty string. it should only show data when we click save button.
-        labelClientData.Text = string.Empty;
+        try
+        {
+            clientVM = new ClientViewModel();
+            setBindings();
+            setupDataGridView();
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show(ex.Message,
+                            "Database Connection error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message,
+                            "Processing Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+        }
     }
 
     private void setBindings()
     {
-        // textboxes
-        textBoxClientCode.DataBindings.Add("Text", clientVM, "DisplayClient.ClientCode", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxCompanyName.DataBindings.Add("Text", clientVM, "DisplayClient.CompanyName", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxAddress1.DataBindings.Add("Text", clientVM, "DisplayClient.Address1", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxAddress2.DataBindings.Add("Text", clientVM, "DisplayClient.Address2", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxCity.DataBindings.Add("Text", clientVM, "DisplayClient.City", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxProvince.DataBindings.Add("Text", clientVM, "DisplayClient.Province", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxPostalCode.DataBindings.Add("Text", clientVM, "DisplayClient.PostalCode", false, DataSourceUpdateMode.OnPropertyChanged);
-        textBoxYtdSales.DataBindings.Add("Text", clientVM, "DisplayClient.YtdSales", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00;(#,##0.00);0");
-        checkBoxCreditHold.DataBindings.Add("Checked", clientVM, "DisplayClient.CreditHold", false, DataSourceUpdateMode.OnPropertyChanged);
-        richTextBoxNotes.DataBindings.Add("Text", clientVM, "DisplayClient.Notes", false, DataSourceUpdateMode.OnPropertyChanged);
-
         // data grid view
         dataGridViewClients.AutoGenerateColumns = false;
         dataGridViewClients.DataSource = clientVM.Clients;
@@ -57,6 +60,8 @@ public partial class MainForm : Form
         dataGridViewClients.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         // dataGridViewClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+        // set default font size
+        dataGridViewClients.DefaultCellStyle.Font = new Font(dataGridViewClients.DefaultCellStyle.Font.FontFamily, 11);
 
         // add columns
 
@@ -71,6 +76,8 @@ public partial class MainForm : Form
         int ytdSalesColumnWidth = 80;
         int creditHoldColumnWidth = 80;
         // int notesColumnWidth = 150;
+
+        double defaultWidthIncreaseFactor = 1.5;
 
         // column 1: clientCode
         DataGridViewTextBoxColumn clientCode = new DataGridViewTextBoxColumn();
@@ -88,7 +95,7 @@ public partial class MainForm : Form
         companyName.Name = "companyName";
         companyName.DataPropertyName = "CompanyName";
         companyName.HeaderText = "Company Name";
-        companyName.Width = companyNameColumnWidth;
+        companyName.Width = (int)(companyNameColumnWidth * defaultWidthIncreaseFactor);
         companyName.SortMode = DataGridViewColumnSortMode.NotSortable;
         //companyName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;         // can only set minimum width or AutoSizeColumnMode.Fill
         dataGridViewClients.Columns.Add(companyName);
@@ -98,7 +105,7 @@ public partial class MainForm : Form
         address1.Name = "address1";
         address1.DataPropertyName = "Address1";
         address1.HeaderText = "Address 1";
-        address1.Width = address1ColumnWidth;
+        address1.Width = (int)(address1ColumnWidth * defaultWidthIncreaseFactor);
         address1.SortMode = DataGridViewColumnSortMode.NotSortable;
         //address1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(address1);
@@ -108,7 +115,7 @@ public partial class MainForm : Form
         address2.Name = "address2";
         address2.DataPropertyName = "Address2";
         address2.HeaderText = "Address 2";
-        address2.Width = address2ColumnWidth;
+        address2.Width = (int)(address2ColumnWidth * defaultWidthIncreaseFactor);
         address2.SortMode = DataGridViewColumnSortMode.NotSortable;
         //address2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(address2);
@@ -118,7 +125,7 @@ public partial class MainForm : Form
         city.Name = "city";
         city.DataPropertyName = "City";
         city.HeaderText = "City";
-        city.Width = cityColumnWidth;
+        city.Width = (int)(cityColumnWidth * defaultWidthIncreaseFactor);
         city.SortMode = DataGridViewColumnSortMode.NotSortable;
         //city.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(city);
@@ -128,7 +135,7 @@ public partial class MainForm : Form
         province.Name = "city";
         province.DataPropertyName = "Province";
         province.HeaderText = "Province";
-        province.Width = provinceColumnWidth;
+        province.Width = (int)(provinceColumnWidth * defaultWidthIncreaseFactor);
         province.SortMode = DataGridViewColumnSortMode.NotSortable;
         //province.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(province);
@@ -138,7 +145,7 @@ public partial class MainForm : Form
         postalCode.Name = "postalCode";
         postalCode.DataPropertyName = "PostalCode";
         postalCode.HeaderText = "Postal Code";
-        postalCode.Width = postalCodeColumnWidth;
+        postalCode.Width = (int)(postalCodeColumnWidth * defaultWidthIncreaseFactor);
         postalCode.SortMode = DataGridViewColumnSortMode.NotSortable;
         //postalCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         dataGridViewClients.Columns.Add(postalCode);
@@ -148,7 +155,7 @@ public partial class MainForm : Form
         ytdSales.Name = "ytdSales";
         ytdSales.DataPropertyName = "YtdSales";
         ytdSales.HeaderText = "YTD Sales";
-        ytdSales.Width = ytdSalesColumnWidth;
+        ytdSales.Width = (int)(ytdSalesColumnWidth * defaultWidthIncreaseFactor);
         // special formatting for decimal or float data
         ytdSales.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
         ytdSales.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -163,7 +170,7 @@ public partial class MainForm : Form
         creditHold.Name = "creditHold";
         creditHold.DataPropertyName = "CreditHold";
         creditHold.HeaderText = "Credit Hold";
-        creditHold.Width = creditHoldColumnWidth;
+        creditHold.Width = (int)(creditHoldColumnWidth * defaultWidthIncreaseFactor);
         creditHold.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
         creditHold.SortMode = DataGridViewColumnSortMode.NotSortable;
         //creditHold.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -193,38 +200,107 @@ public partial class MainForm : Form
         }
     }
 
-    private void dataGridViewClients_SelectionChanged(object sender, EventArgs e)
+    private void buttonEdit_Click(object sender, EventArgs e)
     {
-        if (dataGridViewClients.SelectedRows.Count > 0)
+        openClientEditDialog(true);
+    }
+
+    private void buttonNew_Click(object sender, EventArgs e)
+    {
+        openClientEditDialog(false);
+    }
+
+    private void openClientEditDialog(bool isEditMode)
+    {
+        // if edit mode, set the display product in edit form otherwise set it as empty
+        if (isEditMode)
         {
-            int index = dataGridViewClients.SelectedRows[0].Index;
-            clientVM.SetDisplayProduct(index);
+            clientVM.SetDisplayProduct(clientVM.Clients[dataGridViewClients.CurrentRow.Index]);
+        }
+        else
+        {
+            clientVM.SetDisplayProduct(new Client());
+        }
+
+        ClientEditDialog dlg = new ClientEditDialog(clientVM);
+        dlg.IsEditMode = isEditMode;
+
+        dlg.ShowDialog();
+
+        // refresh Grid is a way the same row is still selected
+        if (dlg.DialogResult == DialogResult.OK)
+        {
+            refreshGrid();
+        }
+
+        dlg.Dispose();
+    }
+
+    private void refreshGrid()
+    {
+        clientVM.syncViewModelWithDb();
+
+        int selectedIndex = dataGridViewClients.CurrentRow.Index;
+        dataGridViewClients.DataSource = clientVM.Clients;
+
+        if (selectedIndex >= 0 && selectedIndex < dataGridViewClients.Rows.Count)
+        {
+            dataGridViewClients.Rows[selectedIndex].Selected = true;
         }
     }
 
-    private void buttonSave_Click(object sender, EventArgs e)
+    private void buttonDelete_Click(object sender, EventArgs e)
     {
-        // save whatever is in the text boxes to the Clients list and also show on labelClientData
-        
+        // Confirm that the user wants to delete the record permanently. then delete
+        try
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete the record permanently?",
+                                                  "Delete Permanently?",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
 
-        // get the updated client from the Ui first
-        Client displayedClient = clientVM.DisplayClient;
+            if (result == DialogResult.Yes)
+            {
+                Client client = clientVM.Clients[dataGridViewClients.CurrentRow.Index];
 
-        int index = dataGridViewClients.SelectedRows[0].Index;
-        clientVM.Clients[index] = displayedClient;
+                int rowsAffected = ClientRepository.DeleteClient(client);
+                refreshGrid();
 
-        labelClientData.Text = $"""
-                               {displayedClient.ClientCode}
-                               {displayedClient.CompanyName}
-                               {displayedClient.Address1}
-                               {displayedClient.Address2}
-                               {displayedClient.City}
-                               {displayedClient.Province}
-                               {displayedClient.PostalCode}
-                               {displayedClient.YtdSales}
-                               {displayedClient.CreditHold}
-                               {displayedClient.Notes}
-                               """;
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("More than 1 record was affected with deletion.");
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show(ex.Message,
+                            "Database Connection error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message,
+                            "Processing Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+        }
+    }
 
+    private void MainForm_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            if (dataGridViewClients.Focused)
+            {
+                // Prevent further processing of Enter Key
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                // Call the event handler of the Edit button
+                buttonEdit_Click(sender, e);
+            }
+        }
     }
 }

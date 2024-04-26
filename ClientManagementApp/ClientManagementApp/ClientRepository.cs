@@ -128,27 +128,51 @@ internal class ClientRepository
 
     private static int processQuery(String sqlQuery, Client client)
     {
-        using SqlConnection conn = new SqlConnection(Config.connString);
-        using SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+        if (sqlQuery.Contains("INSERT") && !primaryKeyIsUnique(client))
+        {
+            throw new InvalidOperationException("Client Code is duplicate.");
+        }
+        else
+        {
+            using SqliteConnection conn = new SqliteConnection(Config.connString);
+            using SqliteCommand cmd = new SqliteCommand(sqlQuery, conn);
+
+            conn.Open();
+
+            cmd.Parameters.AddWithValue("@clientCode", client.ClientCode);
+            cmd.Parameters.AddWithValue("@companyName", client.CompanyName);
+            cmd.Parameters.AddWithValue("@address1", client.Address1);
+            cmd.Parameters.AddWithValue("@address2", client.Address2);
+            cmd.Parameters.AddWithValue("@city", client.City);
+            cmd.Parameters.AddWithValue("@province", client.Province);
+            cmd.Parameters.AddWithValue("@postalCode", client.PostalCode);
+            cmd.Parameters.AddWithValue("@ytdSales", client.YtdSales);
+            cmd.Parameters.AddWithValue("@creditHold", client.CreditHold);
+            cmd.Parameters.AddWithValue("@notes", client.Notes);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected;
+        }        
+    }
+
+    private static bool primaryKeyIsUnique(Client client)
+    {
+        string sqlQuery = $"""
+                          SELECT COUNT(*) FROM {Config.tableName} 
+                          WHERE ClientCode = @clientCode
+                          """;
+
+        using SqliteConnection conn = new SqliteConnection(Config.connString);
+        using SqliteCommand cmd = new SqliteCommand(sqlQuery, conn);
 
         conn.Open();
 
         cmd.Parameters.AddWithValue("@clientCode", client.ClientCode);
-        cmd.Parameters.AddWithValue("@companyName", client.CompanyName);
-        cmd.Parameters.AddWithValue("@address1", client.Address1);
-        cmd.Parameters.AddWithValue("@address2", client.Address2);
-        cmd.Parameters.AddWithValue("@city", client.City);
-        cmd.Parameters.AddWithValue("@province", client.Province);
-        cmd.Parameters.AddWithValue("@postalCode", client.PostalCode);
-        cmd.Parameters.AddWithValue("@ytdSales", client.YtdSales);
-        cmd.Parameters.AddWithValue("@creditHold", client.CreditHold);
-        cmd.Parameters.AddWithValue("@notes", client.Notes);
 
-        int rowsAffected = cmd.ExecuteNonQuery();
+        int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-        return rowsAffected;
+        return count == 0;
     }
-
 
     public static int DeleteClient(Client client)
     {
@@ -158,8 +182,8 @@ internal class ClientRepository
                             ClientCode = @clientCode
                           """;
 
-        using SqlConnection conn = new SqlConnection(Config.connString);
-        using SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+        using SqliteConnection conn = new SqliteConnection(Config.connString);
+        using SqliteCommand cmd = new SqliteCommand(sqlQuery, conn);
 
         conn.Open();
 

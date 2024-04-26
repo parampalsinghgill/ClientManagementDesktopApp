@@ -6,6 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClientManagementApp;
-internal class ClientList : BindingList<Client>
+public class ClientList : BindingList<Client>
 {
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClientManagementApp;
-internal class Client
+public class Client
 {
     public String ClientCode { get; set; }
     public String CompanyName { get; set; }

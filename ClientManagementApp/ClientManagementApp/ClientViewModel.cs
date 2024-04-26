@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClientManagementApp;
-internal class ClientViewModel : INotifyPropertyChanged
+public class ClientViewModel : INotifyPropertyChanged
 {
-    public ClientList Clients { get; } // will be set from constructor
+    public ClientList Clients { get; private set; } // will be set from constructor and refreshed with private method
     private Client displayClient;
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -38,20 +38,24 @@ internal class ClientViewModel : INotifyPropertyChanged
         }
     }
 
-    internal void SetDisplayProduct(int index)
+    public void syncViewModelWithDb()
     {
-        Client selectedClient = Clients[index];
+        this.Clients = ClientRepository.GetClients();
+    }
+
+    internal void SetDisplayProduct(Client client)
+    {
         Client copyClient = new Client { 
-                                    ClientCode = selectedClient.ClientCode, 
-                                    CompanyName = selectedClient.CompanyName,
-                                    Address1 = selectedClient.Address1,
-                                    Address2 = selectedClient.Address2,
-                                    City = selectedClient.City,
-                                    Province = selectedClient.Province,
-                                    PostalCode = selectedClient.PostalCode,
-                                    YtdSales = selectedClient.YtdSales,
-                                    CreditHold = selectedClient.CreditHold,
-                                    Notes = selectedClient.Notes,
+                                    ClientCode = client.ClientCode, 
+                                    CompanyName = client.CompanyName,
+                                    Address1 = client.Address1,
+                                    Address2 = client.Address2,
+                                    City = client.City,
+                                    Province = client.Province,
+                                    PostalCode = client.PostalCode,
+                                    YtdSales = client.YtdSales,
+                                    CreditHold = client.CreditHold,
+                                    Notes = client.Notes,
                                 };
 
         DisplayClient = copyClient;

@@ -87,3 +87,4 @@ C:\Users\parampal.gill\Documents\MyProjects\COMP3602\Project_4Assignments\Client
 C:\Users\parampal.gill\Documents\MyProjects\COMP3602\Project_4Assignments\ClientManagementDesktopApp\ClientManagementApp\ClientManagementApp\bin\Debug\net8.0-windows\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\parampal.gill\Documents\MyProjects\COMP3602\Project_4Assignments\ClientManagementDesktopApp\ClientManagementApp\ClientManagementApp\bin\Debug\net8.0-windows\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\parampal.gill\Documents\MyProjects\COMP3602\Project_4Assignments\ClientManagementDesktopApp\ClientManagementApp\ClientManagementApp\bin\Debug\net8.0-windows\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\parampal.gill\Documents\MyProjects\COMP3602\Project_4Assignments\ClientManagementDesktopApp\ClientManagementApp\ClientManagementApp\obj\Debug\net8.0-windows\ClientManagementApp.ClientEditDialog.resources

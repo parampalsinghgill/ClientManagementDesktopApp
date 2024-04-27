@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientManagementApp;
+namespace ClientManagementApp.Data;
 internal class Config
 {
     private static readonly string databaseFileRelativePath = "../../../../Databases/Clients.db";

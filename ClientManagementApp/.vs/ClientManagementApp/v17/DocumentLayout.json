@@ -3,23 +3,23 @@
   "WorkspaceRootPath": "C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\clientmanagementapp\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|c:\\users\\parampal.gill\\documents\\myprojects\\comp3602\\project_4assignments\\clientmanagementdesktopapp\\clientmanagementapp\\clientmanagementapp\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|solutionrelative:clientmanagementapp\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|c:\\users\\parampal.gill\\documents\\myprojects\\comp3602\\project_4assignments\\clientmanagementdesktopapp\\clientmanagementapp\\clientmanagementapp\\clienteditdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\clientmanagementapp\\clienteditdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|solutionrelative:clientmanagementapp\\clienteditdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\clientmanagementapp\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|solutionrelative:clientmanagementapp\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|c:\\users\\parampal.gill\\documents\\myprojects\\comp3602\\project_4assignments\\clientmanagementdesktopapp\\clientmanagementapp\\clientmanagementapp\\data\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|solutionrelative:clientmanagementapp\\data\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\clientmanagementapp\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|solutionrelative:clientmanagementapp\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|c:\\users\\parampal.gill\\documents\\myprojects\\comp3602\\project_4assignments\\clientmanagementdesktopapp\\clientmanagementapp\\clientmanagementapp\\clienteditdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\clientmanagementapp\\clienteditdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5C891FF4-AA2A-4E9B-B865-0A3ADDECC1D1}|ClientManagementApp\\ClientManagementApp.csproj|solutionrelative:clientmanagementapp\\clienteditdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -53,7 +53,7 @@
               "RelativeDocumentMoniker": "ClientManagementApp\\MainForm.cs",
               "ToolTip": "C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\ClientManagementApp\\MainForm.cs",
               "RelativeToolTip": "ClientManagementApp\\MainForm.cs",
-              "ViewState": "AQIAAPMAAAAAAAAAAAAiwP0AAABUAAAA",
+              "ViewState": "AQIAAPUAAAAAAAAAAAAiwAABAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-25T17:11:36.183Z",
               "IsPinned": true,
@@ -88,10 +88,10 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ClientRepository.cs",
-              "DocumentMoniker": "C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\ClientManagementApp\\ClientRepository.cs",
-              "RelativeDocumentMoniker": "ClientManagementApp\\ClientRepository.cs",
-              "ToolTip": "C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\ClientManagementApp\\ClientRepository.cs",
-              "RelativeToolTip": "ClientManagementApp\\ClientRepository.cs",
+              "DocumentMoniker": "C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\ClientManagementApp\\Data\\ClientRepository.cs",
+              "RelativeDocumentMoniker": "ClientManagementApp\\Data\\ClientRepository.cs",
+              "ToolTip": "C:\\Users\\parampal.gill\\Documents\\MyProjects\\COMP3602\\Project_4Assignments\\ClientManagementDesktopApp\\ClientManagementApp\\ClientManagementApp\\Data\\ClientRepository.cs",
+              "RelativeToolTip": "ClientManagementApp\\Data\\ClientRepository.cs",
               "ViewState": "AQIAAJoAAAAAAAAAAAAEwLkAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-17T21:51:21.309Z",

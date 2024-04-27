@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientManagementApp;
+namespace ClientManagementApp.Data;
 
 // mapping of the Client table columns
 internal class ClientDefinition

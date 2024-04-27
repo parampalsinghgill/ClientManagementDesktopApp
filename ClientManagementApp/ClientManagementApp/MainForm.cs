@@ -1,3 +1,5 @@
+using ClientManagementApp.Common;
+using ClientManagementApp.Data;
 using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 

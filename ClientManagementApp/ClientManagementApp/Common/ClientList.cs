@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientManagementApp;
+namespace ClientManagementApp.Common;
 public class ClientList : BindingList<Client>
 {
 }

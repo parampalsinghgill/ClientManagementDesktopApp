@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using ClientManagementApp.Common;
+using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientManagementApp;
+namespace ClientManagementApp.Data;
 internal class ClientRepository
 {
     internal static ClientList GetClients()
@@ -17,11 +18,11 @@ internal class ClientRepository
         // SqlConnection
         using (SqliteConnection conn = new SqliteConnection(Config.connString))
         {
-            String query = $"""
+            string query = $"""
                            SELECT  ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes
                            FROM {Config.tableName}
                            """;
-            
+
             using (SqliteCommand cmd = new SqliteCommand(query, conn))
             {
                 try
@@ -35,18 +36,18 @@ internal class ClientRepository
                             while (reader.Read())
                             {
                                 clients.Add(new Client
-                                            {
-                                                ClientCode = (string)reader["ClientCode"],
-                                                CompanyName = (string)reader["CompanyName"],
-                                                Address1 = (string)reader["Address1"],
-                                                Address2 = reader["Address2"] as string,                    // could be null
-                                                City = reader["City"] as string,                            // could be null
-                                                Province = (String)reader["Province"],
-                                                PostalCode = reader["PostalCode"] as string,                // could be null
-                                                YtdSales = Convert.ToDecimal(reader["YTDSales"]),
-                                                CreditHold = Convert.ToBoolean(reader["creditHold"]),
-                                                Notes = reader["Notes"] as string                           // could be null
-                                            });
+                                {
+                                    ClientCode = (string)reader["ClientCode"],
+                                    CompanyName = (string)reader["CompanyName"],
+                                    Address1 = (string)reader["Address1"],
+                                    Address2 = reader["Address2"] as string,                    // could be null
+                                    City = reader["City"] as string,                            // could be null
+                                    Province = (string)reader["Province"],
+                                    PostalCode = reader["PostalCode"] as string,                // could be null
+                                    YtdSales = Convert.ToDecimal(reader["YTDSales"]),
+                                    CreditHold = Convert.ToBoolean(reader["creditHold"]),
+                                    Notes = reader["Notes"] as string                           // could be null
+                                });
                             }
                         }
                     } // exit reader
@@ -126,7 +127,7 @@ internal class ClientRepository
         return processQuery(sqlQuery, client);
     }
 
-    private static int processQuery(String sqlQuery, Client client)
+    private static int processQuery(string sqlQuery, Client client)
     {
         if (sqlQuery.Contains("INSERT") && !primaryKeyIsUnique(client))
         {
@@ -152,7 +153,7 @@ internal class ClientRepository
 
             int rowsAffected = cmd.ExecuteNonQuery();
             return rowsAffected;
-        }        
+        }
     }
 
     private static bool primaryKeyIsUnique(Client client)
@@ -188,7 +189,7 @@ internal class ClientRepository
         conn.Open();
 
         cmd.Parameters.AddWithValue("@clientCode", client.ClientCode);
-        
+
         int rowsAffected = cmd.ExecuteNonQuery();
 
         return rowsAffected;

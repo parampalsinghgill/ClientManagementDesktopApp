@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using ClientManagementApp.Common;
+using ClientManagementApp.Data;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
